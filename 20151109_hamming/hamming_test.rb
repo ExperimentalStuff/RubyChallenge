@@ -7,6 +7,13 @@ require_relative 'hamming'
 # ab84334 Merge pull request #106 from bennn/grep-meta
 
 class HammingTest < Minitest::Test
+
+  def test_invalid_input
+    # assert raise argument error if characters other than ATCG appears
+    assert_raises(ArgumentError) { Hamming.compute('AATGH', 'AAATT') }
+    assert_raises(ArgumentError) { Hamming.compute('AATG', 'AAAB') }
+  end
+
   def test_identical_strands
     assert_equal 0, Hamming.compute('A', 'A')
   end
@@ -74,4 +81,7 @@ class HammingTest < Minitest::Test
   def test_bookkeeping
     assert_equal 1, Hamming::VERSION
   end
+
+
+
 end
